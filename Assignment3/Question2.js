@@ -1,7 +1,7 @@
 // Count Frequency of Elements
 // Given an array of n integers, write a program to count the frequency of each element in the array.
 
-function countFrequencies(arr) {
+function countFrequencies(arr){
     const frequency = {};
     arr.forEach(element => {
         if (frequency[element]) {
