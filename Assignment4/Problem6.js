@@ -28,7 +28,6 @@ function findSaddlePoint(matrix) {
           break;
         }
       }
-  
       if (isMaxCol) {
         saddlePoint = minRow;
         break;
@@ -50,4 +49,3 @@ function findSaddlePoint(matrix) {
   } else {
     console.log(`Saddle point: ${saddlePoint}`);
   }
-  
