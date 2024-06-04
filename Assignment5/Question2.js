@@ -4,31 +4,35 @@ const rl = readline.createInterface({
     output: process.stdout,
 });
 
-function isBalanced(expression) {
-    let stack = [];
-    let map = {
-        '(': ')',
-        '[': ']',
-        '{': '}'
+function areParenthesesBalanced(expression) {
+    const stack = [];
+    const openingBrackets = ['(', '{', '['];
+    const closingBrackets = [')', '}', ']'];
+    const bracketPairs = {
+      ')': '(',
+      '}': '{',
+      ']': '[',
     };
-
-    for (let char of expression) {
-        if (char in map) {
-            // If the character is an opening bracket, push it onto the stack
-            stack.push(char);
-        } else if (Object.values(map).includes(char)) {
-            // If the character is a closing bracket, check if it matches the top of the stack
-            let last = stack.pop();
-            if (map[last] !== char) {
-                return false;
-            }
+  
+    for (let i = 0; i < expression.length; i++) {
+      const char = expression[i];
+  
+      if (openingBrackets.includes(char)) {
+        stack.push(char);
+      } else if (closingBrackets.includes(char)) {
+        if (stack.length === 0 || stack.pop() !== bracketPairs[char]) {
+          return false;
         }
+      }
     }
-
-    // If the stack is empty, all opening brackets have been matched
-    return stack.length === 0;
-}
-
-// Example usage
-console.log(isBalanced("{[()]}"));       // Output: true
-console.log(isBalanced("{[(])}"));       // Output: false
+  
+    return stack.length === 0; 
+  }
+  
+  const expression1 = "{[()]}";
+  const expression2 = "{[(])}";
+  
+  console.log(expression1, areParenthesesBalanced(expression1)); 
+  console.log(expression2, areParenthesesBalanced(expression2)); 
+  
+  rl.close();
